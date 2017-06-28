@@ -11,21 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.example.swaggerReDoc.SwaggerReDocApplication;
 import br.com.softplan.example.swaggerReDoc.model.Student;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/rest/student")
 class StudentService {
 
+	@ApiOperation(notes = "Returns all students", value = "Find all students", nickname = "getAllStudents", tags = { "Students" })
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public HashMap<Long, Student> getAllStudents() {
 		return SwaggerReDocApplication.hmStudent;
 	}
 
+	@ApiOperation(notes = "Returns a student by a specific ID", value = "Find student by ID", nickname = "getStudent", tags = { "Students" })
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Student getStudent(@PathVariable long id) {
 		return SwaggerReDocApplication.hmStudent.get(new Long(id));
 	}
 
+	@ApiOperation(notes = "Add a student passing a name and a subject", value = "Insert student", nickname = "addStudent", tags = { "Students" })
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Student addStudent(@RequestParam(value = "name") String name, @RequestParam(value = "subject", defaultValue = "unknown") String subject) {
 
@@ -35,6 +39,7 @@ class StudentService {
 
 	}
 
+	@ApiOperation(notes = "Update a student passing a name and a subject", value = "Update student", nickname = "updateStudent", tags = { "Students" })
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public Student updateStudent(@RequestBody Student student) throws Exception {
 
@@ -47,6 +52,7 @@ class StudentService {
 		return student;
 	}
 
+	@ApiOperation(notes = "Delete a student passing the ID", value = "Update student", nickname = "updateStudent", tags = { "Students" })
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public Student deleteStudent(@PathVariable long id) throws Exception {
 

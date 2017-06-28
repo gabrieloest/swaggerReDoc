@@ -1,0 +1,3 @@
+spring.application.name: swaggerReDoc
+server.contextPath: /${spring.application.name}
+management.security.enabled: false
